@@ -1,26 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <v-app>
+    <v-main>
+      <v-form ref="form">
+        Working
+        <v-combobox v-model="modelWorking" :items="items" :rules="[(v) => !!v || 'Requis']" />
+        Not working
+        <v-combobox v-model="modelNotWorking" multiple :items="items" :rules="[(v) => !!v || 'Requis']" />
+        <v-btn @click="checkValidState">
+          Submit
+        </v-btn>
+      </v-form>
+    </v-main>
+  </v-app>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+import { ref } from 'vue'
+const form = ref(null)
+const modelWorking = ref(null)
+const modelNotWorking = ref(null)
+const items = ref([
+  'Item 1',
+  'Item 2',
+])
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+const checkValidState = () => {
+  form.value.validate()
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
