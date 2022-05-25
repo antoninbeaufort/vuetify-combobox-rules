@@ -2,10 +2,13 @@
   <v-app>
     <v-main>
       <v-form ref="form">
-        Working
-        <v-combobox v-model="modelWorking" :items="items" :rules="[(v) => !!v || 'Requis']" />
-        Not working
-        <v-combobox v-model="modelNotWorking" multiple :items="items" :rules="[(v) => !!v || 'Requis']" />
+        <v-select
+          v-model="selected"
+          variant="underlined"
+          :items="items"
+          label="Item"
+          :rules="[(v) => !!v || 'Item required']"
+        />
         <v-btn @click="checkValidState">
           Submit
         </v-btn>
@@ -17,8 +20,7 @@
 <script setup>
 import { ref } from 'vue'
 const form = ref(null)
-const modelWorking = ref(null)
-const modelNotWorking = ref(null)
+const selected = ref(null)
 const items = ref([
   'Item 1',
   'Item 2',
